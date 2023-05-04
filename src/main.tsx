@@ -7,7 +7,9 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter } from 'react-router-dom';
 
+export const globalToken = { accessToken: '' };
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:8000/graphql',
@@ -34,6 +36,7 @@ const authorizationLink = setContext(() => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   return {
     headers: {
+      // authorization: token ? `Bearer ${token}` : '',
       authorization: token ? `Bearer ${token}` : '',
     },
   };
@@ -49,8 +52,10 @@ export const client = new ApolloClient({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 )

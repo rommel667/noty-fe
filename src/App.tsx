@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import Header from "./components/header/Header";
+import Login from "./components/authentication/Login";
+import Layout from "./components/layout/Layout";
 import ItemGroupList from "./components/main/ItemGroupList";
 
 const App = () => {
@@ -7,10 +7,10 @@ const App = () => {
 
 
   return (
-    <>
-      <Header />
-      <ItemGroupList />
-    </>
+    <Layout>
+      {/* <ItemGroupList /> */}
+      <Login />
+    </Layout>
   )
 }
 
