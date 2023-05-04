@@ -1,3 +1,4 @@
+import { useUserStore } from '@/state/user.store'
 import { Navbar, Dropdown, Avatar } from 'flowbite-react'
 import { FC } from 'react'
 
@@ -6,6 +7,9 @@ interface ProfileProps {
 }
 
 const Profile: FC<ProfileProps> = ({ }) => {
+
+    const { logout } = useUserStore()
+
     return (
         <div className="flex md:order-2">
             <Dropdown
@@ -31,7 +35,7 @@ const Profile: FC<ProfileProps> = ({ }) => {
                     Earnings
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item onClick={() => console.log("TEST SIGN OUT")}>
+                <Dropdown.Item onClick={logout}>
                     Sign out
                 </Dropdown.Item>
             </Dropdown>
