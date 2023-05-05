@@ -21,6 +21,7 @@ const AppRoutes = () => {
 
       <Route element={<ProtectedRoutes />}>
         <Route path="/" element={<ItemGroupList />} />
+        <Route path="/:id" element={<ItemGroupList />} />
       </Route>
 
       <Route path="*" element={<CatchAllRoutes />} />

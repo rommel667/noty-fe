@@ -19,7 +19,7 @@ const ItemGroupList = () => {
 
     return (
 
-        <div>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4'>
             {data.itemGroups.map((item: any) => (
                 <ItemGroupCard key={item.id} item={item} />
             ))}
@@ -33,6 +33,8 @@ const GET_ITEM_GROUPS = gql`
           id
           name
           type
+          createdAt
+          updatedAt
         }
       }
     `;

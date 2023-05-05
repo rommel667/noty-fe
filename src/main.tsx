@@ -13,13 +13,13 @@ export const globalToken = { accessToken: '' };
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:8000/graphql',
-  // uri: 'https://collab-and-create2.herokuapp.com/graphql'
+  // uri: 'https://noty-be.onrender.com/graphql'
 });
 
 const wsLink = new GraphQLWsLink(
   createClient({
     url: 'ws://localhost:8000/graphql',
-    // url: 'wss://collab-and-create2.herokuapp.com/graphql'
+    // url: 'wss://noty-be.onrender.com/graphql'
   })
 );
 
