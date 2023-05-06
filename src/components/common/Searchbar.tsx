@@ -23,7 +23,7 @@ const Searchbar: FC<SearchbarProps> = ({ }) => {
             >
                 {categories.map((category) => {
                     return (
-                        <Dropdown.Item onClick={() => setSelectedCategory(category)}>
+                        <Dropdown.Item key={category} onClick={() => setSelectedCategory(category)}>
                             {category}
                         </Dropdown.Item>
                     )

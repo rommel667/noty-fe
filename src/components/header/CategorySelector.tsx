@@ -1,30 +1,21 @@
 import { FC, useState, useRef } from 'react'
-import { Tabs, Button, TabsRef } from 'flowbite-react'
+import { Button, TabsRef } from 'flowbite-react'
 
-interface ItemGroupProps {
+
+//##########################################################################################
+//###################   WILL BE REVISED AS AN ICONS BELOW HEADER  ##########################
+//##########################################################################################
+
+interface CategorySelectorProps {
 
 }
 
-const ItemGroupSelector: FC<ItemGroupProps> = ({ }) => {
+const CategorySelector: FC<CategorySelectorProps> = ({ }) => {
     const [activeTab, setActiveTab] = useState<number>(0);
     const tabsRef = useRef<TabsRef>(null);
 
     return (
         <>
-            {/* <Tabs.Group
-                aria-label="Default tabs"
-                style="default"
-                ref={tabsRef}
-                onActiveTabChange={tab => setActiveTab(tab)}
-            >
-                <Tabs.Item active title="Profile">
-                    Profile content
-                </Tabs.Item>
-                <Tabs.Item title="Dashboard">Dashboard content</Tabs.Item>
-                <Tabs.Item title="Settings">Settings content</Tabs.Item>
-                <Tabs.Item title="Contacts">Contacts content</Tabs.Item>
-            </Tabs.Group>
-            <div>Active tab: {activeTab}</div> */}
             <Button.Group>
                 <Button color="gray" onClick={() => tabsRef.current?.setActiveTab(0)}>
                     Profile
@@ -43,4 +34,4 @@ const ItemGroupSelector: FC<ItemGroupProps> = ({ }) => {
     )
 }
 
-export default ItemGroupSelector
+export default CategorySelector

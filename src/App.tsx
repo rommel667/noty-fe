@@ -1,5 +1,6 @@
-import Layout from "./components/layout/Layout";
-import AppRoutes from "./components/routes/AppRoutes";
+import Layout from "./layout/Layout";
+import AppRoutes from "./routes/AppRoutes";
+
 
 
 

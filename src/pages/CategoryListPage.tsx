@@ -1,13 +1,12 @@
+import CategoryCard from '@/components/categories/CategoryCard';
 import { gql, useQuery } from '@apollo/client';
 import { FC } from 'react'
-import CategoryCard from './CategoryCard';
 
-interface CategoryListProps {
+interface CategoryListPageProps {
 
 }
 
-const CategoryList: FC<CategoryListProps> = ({ }) => {
-
+const CategoryListPage: FC<CategoryListPageProps> = ({ }) => {
     const { loading, error, data } = useQuery(GET_CATEGORIES);
 
     if (loading) {
@@ -27,7 +26,6 @@ const CategoryList: FC<CategoryListProps> = ({ }) => {
             ))}
         </div>
     )
-
 }
 
 const GET_CATEGORIES = gql`
@@ -42,4 +40,4 @@ const GET_CATEGORIES = gql`
       }
     `;
 
-export default CategoryList
+export default CategoryListPage

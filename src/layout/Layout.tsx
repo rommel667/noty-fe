@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import Header from '../header/Header';
 import { useUserStore } from '@/state/user.store';
+import Header from '@/components/header/Header';
 
 interface LayoutProps {
     children: React.ReactNode;
