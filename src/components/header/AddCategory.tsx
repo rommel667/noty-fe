@@ -1,14 +1,42 @@
 import { Button, Label, Modal, Select, TextInput } from 'flowbite-react'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
+import { suggestedFields } from '../main/suggestions'
+import { gql, useMutation } from '@apollo/client'
+import { useUserStore } from '@/state/user.store'
 
-interface AddItemGroupProps {
+interface AddCategoryProps {
 
 }
 
-const AddItemGroup: FC<AddItemGroupProps> = ({ }) => {
+const AddCategory: FC<AddCategoryProps> = ({ }) => {
 
     const [open, setOpen] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
+    const [categoryName, setCategoryName] = useState('')
+    const [selectedCategoryType, setSelectedCategoryType] = useState('')
+    const [fields, setFields] = useState<any>(null)
+    const { isAuth } = useUserStore()
+
+    const [addCategory] = useMutation(ADD_CATEGORY, {
+        onError(error, clientOptions) {
+            console.log("ERROR", error)
+        },
+        onCompleted(data, clientOptions) {
+            console.log("DATA", data)
+            setIsProcessing(false)
+        },
+    })
+
+    useEffect(() => {
+        const result = suggestedFields[selectedCategoryType]
+        console.log("RESULT", result)
+        setFields(result)
+    }, [selectedCategoryType])
+
+    const handleSubmit = () => {
+        setIsProcessing(true)
+        addCategory({ variables: { createCategoryInput: { name: categoryName, type: selectedCategoryType, userId: isAuth?.id, fields } } })
+    }
 
     return (
         <>
@@ -39,6 +67,8 @@ const AddItemGroup: FC<AddItemGroupProps> = ({ }) => {
                                 type='text'
                                 placeholder="Enter category name"
                                 required={true}
+                                value={categoryName}
+                                onChange={(e) => setCategoryName(e.target.value)}
                             />
                         </div>
                         <div id="select">
@@ -51,6 +81,8 @@ const AddItemGroup: FC<AddItemGroupProps> = ({ }) => {
                             <Select
                                 id="countries"
                                 required={true}
+                                value={selectedCategoryType}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedCategoryType(e.target.value)}
                             >
                                 <option>
                                     Todo
@@ -78,40 +110,46 @@ const AddItemGroup: FC<AddItemGroupProps> = ({ }) => {
                                 />
                             </div>
                         </div>
-                        <div className='flex gap-1'>
+                        {fields?.map((field: any) => {
+                            return (
+                                <div className='flex gap-1'><TextInput
+                                    id="details"
+                                    // placeholder="name@company.com"
+                                    required={true}
+                                    className='w-full'
+                                    value={field.fieldName}
+                                />
 
-                            <TextInput
-                                id="details"
-                                placeholder="name@company.com"
-                                required={true}
-                                className='w-full'
-                            />
+                                    <Select
+                                        id="countries"
+                                        required={true}
+                                        className='w-full'
+                                        value={field.fieldType}
+                                        onChange={() => { }}
+                                    >
+                                        <option>
+                                            Text
+                                        </option>
+                                        <option>
+                                            Long Text
+                                        </option>
+                                        <option>
+                                            Image
+                                        </option>
+                                        <option>
+                                            Password
+                                        </option>
+                                        <option>
+                                            Date
+                                        </option>
+                                    </Select>
+                                </div>
+                            )
+                        })}
 
-                            <Select
-                                id="countries"
-                                required={true}
-                                className='w-full'
-                            >
-                                <option>
-                                    Text
-                                </option>
-                                <option>
-                                    Long Text
-                                </option>
-                                <option>
-                                    Image
-                                </option>
-                                <option>
-                                    Password
-                                </option>
-                                <option>
-                                    Date
-                                </option>
-                            </Select>
-                        </div>
                         <Button
                             size="xs"
-                            onClick={() => setOpen(false)}
+                            onClick={() => setFields([...fields, { fieldName: "", fieldType: "" }])}
                             className='w-full'
                         >
                             Add new field
@@ -123,7 +161,7 @@ const AddItemGroup: FC<AddItemGroupProps> = ({ }) => {
                                 isProcessing={isProcessing}
                                 disabled={isProcessing}
                                 color="success"
-                                onClick={() => setIsProcessing(true)}
+                                onClick={handleSubmit}
                                 className='w-full'
                             >
                                 Confirm
@@ -144,4 +182,19 @@ const AddItemGroup: FC<AddItemGroupProps> = ({ }) => {
     )
 }
 
-export default AddItemGroup
+const ADD_CATEGORY = gql`
+  mutation AddCategory($createCategoryInput: CreateCategoryInput!) {
+    createCategory(createCategoryInput: $createCategoryInput) {
+        id
+        name
+        type
+        fields(populate: true) {
+            id
+            fieldName
+            fieldType
+        }
+    }
+  }
+`;
+
+export default AddCategory

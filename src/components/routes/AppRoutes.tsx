@@ -4,9 +4,9 @@ import ProtectedRoutes from './ProtectedRoutes';
 
 import CatchAllRoutes from './CatchAllRoutes';
 import Login from '../authentication/Login';
-import ItemGroupList from '../main/ItemGroupList';
 import Signup from '../authentication/Signup';
 import Authentication from '../authentication/Authentication';
+import CategoryList from '../main/CategoryList';
 
 
 const AppRoutes = () => {
@@ -20,8 +20,8 @@ const AppRoutes = () => {
       </Route>
 
       <Route element={<ProtectedRoutes />}>
-        <Route path="/" element={<ItemGroupList />} />
-        <Route path="/:id" element={<ItemGroupList />} />
+        <Route path="/" element={<CategoryList />} />
+        <Route path="/:id" element={<CategoryList />} />
       </Route>
 
       <Route path="*" element={<CatchAllRoutes />} />
