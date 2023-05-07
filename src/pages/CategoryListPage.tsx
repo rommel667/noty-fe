@@ -11,6 +11,7 @@ const CategoryListPage = () => {
     if (error) {
         return <div>{`Error! ${error.message}`}</div>
     }
+
     return (
 
         <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4'>
@@ -21,8 +22,8 @@ const CategoryListPage = () => {
     )
 }
 
-const GET_CATEGORIES = gql`
-      query GetCategoriess {
+export const GET_CATEGORIES = gql`
+      query GetCategories {
         categories {
           id
           name
