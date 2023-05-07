@@ -17,7 +17,7 @@ const Searchbar: FC<SearchbarProps> = ({ }) => {
             <Dropdown
                 label={selectedCategory}
                 dismissOnClick={true}
-                className='w-full max-w-5xl'
+                className='max-w-5xl'
                 style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
             // value={"TEST"}
             >

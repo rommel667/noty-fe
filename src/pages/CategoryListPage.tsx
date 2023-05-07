@@ -1,16 +1,20 @@
 import { gql, useQuery } from '@apollo/client';
 import CategoryCard from '@/components/categories/CategoryCard';
+import SkeletonCards from '@/components/common/SkeletonCards';
 
 const CategoryListPage = () => {
     const { loading, error, data } = useQuery(GET_CATEGORIES);
 
     if (loading) {
-        console.log("Loading")
-        return <div>Loading</div>
+        return (
+            <SkeletonCards />
+        )
     }
     if (error) {
         return <div>{`Error! ${error.message}`}</div>
     }
+
+    console.log("DATA", data)
 
     return (
 

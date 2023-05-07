@@ -46,9 +46,9 @@ const AddCategoryPage = () => {
             style: {
                 minWidth: '250px',
             },
-            success: {
-                duration: 3000,
-            },
+            // success: {
+            //     duration: 2000,
+            // },
         })
     }
 
@@ -206,6 +206,7 @@ const AddCategoryPage = () => {
                         color="gray"
                         onClick={() => navigate('/')}
                         className='w-full'
+                        disabled={isProcessing}
                     >
                         Cancel
                     </Button>

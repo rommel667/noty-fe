@@ -6,9 +6,10 @@ interface DeleteConfirmationProps {
     open: boolean;
     setOpen: (value: boolean) => void;
     handleConfirm: () => void;
+    isProcessing: boolean;
 }
 
-const DeleteConfirmation: FC<DeleteConfirmationProps> = ({ open, setOpen, handleConfirm }) => {
+const DeleteConfirmation: FC<DeleteConfirmationProps> = ({ open, setOpen, handleConfirm, isProcessing }) => {
     return (
         <Modal
             show={open}
@@ -27,12 +28,14 @@ const DeleteConfirmation: FC<DeleteConfirmationProps> = ({ open, setOpen, handle
                         <Button
                             color="failure"
                             onClick={handleConfirm}
+                            disabled={isProcessing}
                         >
                             Yes, I'm sure
                         </Button>
                         <Button
                             color="gray"
                             onClick={() => setOpen(false)}
+                            disabled={isProcessing}
                         >
                             No, cancel
                         </Button>
