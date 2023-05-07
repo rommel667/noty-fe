@@ -145,15 +145,14 @@ const Signup: FC<SignupProps> = ({ }) => {
                     setErrorMessage('')
                     setAgree(e.target.value === "on" ? "off" : "on")
                 }} />
-                <Label htmlFor="agree">
-                    I agree with the
-                    {' '}
-                    <a
-                        href="/forms"
-                        className="text-blue-600 hover:underline dark:text-blue-500"
+                <Label htmlFor="agree" className='flex gap-1'>
+                    <p>I agree with the</p>
+                    <p
+                        onClick={() => navigate('/terms-and-conditions')}
+                        className="text-blue-600 hover:underline dark:text-blue-500 cursor-pointer"
                     >
                         Terms and Conditions
-                    </a>
+                    </p>
                 </Label>
             </div>
             <Button isProcessing={isProcessing} disabled={isProcessing} type="submit">

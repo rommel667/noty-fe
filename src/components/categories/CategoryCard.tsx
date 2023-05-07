@@ -1,4 +1,4 @@
-import { Card } from 'flowbite-react'
+import { Badge, Card } from 'flowbite-react'
 import moment from 'moment'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -15,9 +15,13 @@ const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
                 {category.name}
             </h5>
 
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+
+            {/* <p className="font-normal text-gray-700 dark:text-gray-400">
                 Type: {category.type}
-            </p>
+            </p> */}
+            <Badge color="info" size='xs' className='w-fit'>
+                {category.type}
+            </Badge>
             <div className='flex justify-between'>
                 <p className='font-extralight text-sm'>Created: {moment(category.createdAt).startOf('day').fromNow()}</p>
                 <p className='font-extralight text-sm'>Last update: {moment(category.updatedAt).startOf('day').fromNow()}</p>

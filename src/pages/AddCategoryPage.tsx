@@ -4,10 +4,9 @@ import { useUserStore } from '@/state/user.store'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Label, Select, TextInput } from 'flowbite-react'
 import { useNavigate } from 'react-router-dom'
-
+import toast from 'react-hot-toast';
 
 const AddCategoryPage = () => {
-
     const [isProcessing, setIsProcessing] = useState(false)
     const [categoryName, setCategoryName] = useState('')
     const [selectedCategoryType, setSelectedCategoryType] = useState('Todo')
@@ -18,11 +17,12 @@ const AddCategoryPage = () => {
     const [addCategory] = useMutation(ADD_CATEGORY, {
         onError(error) {
             console.log("ERROR", error)
+            setIsProcessing(false)
         },
         onCompleted(data) {
             console.log("DATA", data)
             setIsProcessing(false)
-            navigate('/')
+            // navigate('/')
         },
     })
 
@@ -31,10 +31,24 @@ const AddCategoryPage = () => {
         setFields(result)
     }, [selectedCategoryType])
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
         setIsProcessing(true)
-        addCategory({ variables: { createCategoryInput: { name: categoryName, type: selectedCategoryType, userId: isAuth?.id, fields } } })
+        toast.promise(addCategory({ variables: { createCategoryInput: { name: categoryName, type: selectedCategoryType, userId: isAuth?.id, fields } } }),
+            {
+                loading: 'Saving',
+                success: 'Successfully saved',
+                error: 'Error saving',
+            }, {
+            style: {
+                minWidth: '250px',
+            },
+            success: {
+                duration: 5000,
+            },
+        })
     }
+
 
     return (
         <div className='md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10'>
@@ -166,13 +180,11 @@ const AddCategoryPage = () => {
                     Add new field
                 </Button>
 
-
                 <div className="flex justify-between gap-4 mt-4">
                     <Button
                         isProcessing={isProcessing}
                         disabled={isProcessing}
                         color="success"
-                        // onClick={handleSubmit}
                         type='submit'
                         className='w-full'
                     >
@@ -186,7 +198,6 @@ const AddCategoryPage = () => {
                         Cancel
                     </Button>
                 </div>
-
             </form>
         </div>
     )

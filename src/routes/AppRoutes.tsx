@@ -7,12 +7,14 @@ import AddCategoryPage from '@/pages/AddCategoryPage';
 import AuthenticationPage from '@/pages/AuthenticationPage';
 import Login from '@/components/authentication/Login';
 import Signup from '@/components/authentication/Signup';
+import TermsAndConditionsPage from '@/pages/TermsAndConditionsPage';
 
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<PublicRoutes />}>
+        <Route path="terms-and-conditions" element={<TermsAndConditionsPage />} />
         <Route path="auth" element={<AuthenticationPage />} >
           <Route path="signin" element={<Login />} />
           <Route path="signup" element={<Signup />} />
