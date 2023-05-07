@@ -5,6 +5,7 @@ import { gql, useMutation } from '@apollo/client'
 import { Button, Label, Select, TextInput } from 'flowbite-react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
+import { HiTrash } from 'react-icons/hi'
 
 const AddCategoryPage = () => {
     const [isProcessing, setIsProcessing] = useState(false)
@@ -49,6 +50,12 @@ const AddCategoryPage = () => {
         })
     }
 
+
+    const handleDeleteField = (index: number) => {
+        const newFields = fields?.filter((_: any, i: number) => i !== index)
+        console.log("NEW", newFields)
+        setFields([...newFields])
+    }
 
     return (
         <div className='md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10'>
@@ -113,7 +120,7 @@ const AddCategoryPage = () => {
                 </div>
                 {fields?.map((field1: any, index1: number) => {
                     return (
-                        <div className='flex gap-1'>
+                        <div className='flex gap-1 items-center'>
                             <TextInput
                                 id="details"
                                 required={true}
@@ -168,6 +175,10 @@ const AddCategoryPage = () => {
                                     Date
                                 </option>
                             </Select>
+                            <Button color='failure' className='w-9' onClick={() => handleDeleteField(index1)}>
+                                <HiTrash />
+                            </Button>
+
                         </div>
                     )
                 })}
