@@ -12,7 +12,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     const { isAuth } = useUserStore()
 
     return (
-        <div className='md:px-10 xl:px-28'>
+        <div className='md:px-6 xl:px-16'>
             {isAuth ? <Header /> : null}
             {children}
             <Toaster />

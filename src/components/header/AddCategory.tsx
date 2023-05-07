@@ -125,11 +125,11 @@ const AddCategory: FC<AddCategoryProps> = ({ open, setOpen }) => {
                                         } else {
                                             tempFields.push({ ...field2 })
                                         }
-                                        return <div key={index2}>Test</div>
+                                        return <div key={`${index1}${index2}`}>Test</div>
                                     })
                                     setFields(tempFields)
                                 }}
-                                key={index1}
+                                key={field1}
                             />
 
                                 <Select

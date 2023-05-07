@@ -23,7 +23,7 @@ const Header: FC<HeaderProps> = ({ }) => {
                     BrainDump
                 </span>
             </Navbar.Brand>
-            <Navbar.Collapse className='flex flex-1 md:px-10 lg:px-48'>
+            <Navbar.Collapse className='flex flex-1 md:px-10 lg:px-20'>
                 {/* <ItemGroupSelector /> */}
                 <Searchbar />
             </Navbar.Collapse>

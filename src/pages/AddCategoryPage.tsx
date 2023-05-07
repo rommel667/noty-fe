@@ -6,6 +6,7 @@ import { Button, Label, Select, TextInput } from 'flowbite-react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
 import { HiTrash } from 'react-icons/hi'
+import { GET_CATEGORIES } from './CategoryListPage'
 
 const AddCategoryPage = () => {
     const [isProcessing, setIsProcessing] = useState(false)
@@ -23,8 +24,9 @@ const AddCategoryPage = () => {
         onCompleted(data) {
             console.log("DATA", data)
             setIsProcessing(false)
-            // navigate('/')
+            navigate('/')
         },
+        refetchQueries: [GET_CATEGORIES, 'GetCategories'],
     })
 
     useEffect(() => {
@@ -45,7 +47,7 @@ const AddCategoryPage = () => {
                 minWidth: '250px',
             },
             success: {
-                duration: 5000,
+                duration: 3000,
             },
         })
     }
@@ -120,7 +122,7 @@ const AddCategoryPage = () => {
                 </div>
                 {fields?.map((field1: any, index1: number) => {
                     return (
-                        <div className='flex gap-1 items-center'>
+                        <div key={index1} className='flex gap-1 items-center'>
                             <TextInput
                                 id="details"
                                 required={true}
@@ -134,11 +136,10 @@ const AddCategoryPage = () => {
                                         } else {
                                             tempFields.push({ ...field2 })
                                         }
-                                        return <div key={index2}>Test</div>
+                                        // return <div key={index2}>Test</div>
                                     })
                                     setFields(tempFields)
                                 }}
-                                key={index1}
                             />
 
                             <Select
