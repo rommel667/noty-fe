@@ -1,12 +1,7 @@
-import CategoryCard from '@/components/categories/CategoryCard';
 import { gql, useQuery } from '@apollo/client';
-import { FC } from 'react'
+import CategoryCard from '@/components/categories/CategoryCard';
 
-interface CategoryListPageProps {
-
-}
-
-const CategoryListPage: FC<CategoryListPageProps> = ({ }) => {
+const CategoryListPage = () => {
     const { loading, error, data } = useQuery(GET_CATEGORIES);
 
     if (loading) {
@@ -16,8 +11,6 @@ const CategoryListPage: FC<CategoryListPageProps> = ({ }) => {
     if (error) {
         return <div>{`Error! ${error.message}`}</div>
     }
-    console.log("DATA", data)
-
     return (
 
         <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4'>

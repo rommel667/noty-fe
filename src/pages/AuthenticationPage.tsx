@@ -1,11 +1,6 @@
-import { FC } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
-interface AuthenticationPageProps {
-
-}
-
-const AuthenticationPage: FC<AuthenticationPageProps> = ({ }) => {
+const AuthenticationPage = () => {
     const location = useLocation()
 
     return (

@@ -1,15 +1,12 @@
-import { FC, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { suggestedFields } from '@/constants/suggestions'
 import { useUserStore } from '@/state/user.store'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Label, Select, TextInput } from 'flowbite-react'
 import { useNavigate } from 'react-router-dom'
 
-interface AddCategoryPageProps {
 
-}
-
-const AddCategoryPage: FC<AddCategoryPageProps> = ({ }) => {
+const AddCategoryPage = () => {
 
     const [isProcessing, setIsProcessing] = useState(false)
     const [categoryName, setCategoryName] = useState('')
@@ -31,7 +28,6 @@ const AddCategoryPage: FC<AddCategoryPageProps> = ({ }) => {
 
     useEffect(() => {
         const result = suggestedFields[selectedCategoryType]
-        console.log("RESULT", result)
         setFields(result)
     }, [selectedCategoryType])
 
@@ -125,12 +121,21 @@ const AddCategoryPage: FC<AddCategoryPageProps> = ({ }) => {
                             />
 
                             <Select
-                                id="countries"
+                                id="options"
                                 required={true}
                                 className='w-full'
                                 value={field1.fieldType}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-
+                                    const tempFields: any = []
+                                    fields.map((field2: any, index2: number) => {
+                                        if (index1 === index2) {
+                                            tempFields.push({ ...field2, fieldType: e.target.value })
+                                        } else {
+                                            tempFields.push({ ...field2 })
+                                        }
+                                        return <div key={index2}>Test</div>
+                                    })
+                                    setFields(tempFields)
                                 }}
                             >
                                 <option>

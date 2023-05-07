@@ -12,14 +12,12 @@ import { BrowserRouter } from 'react-router-dom';
 export const globalToken = { accessToken: '' };
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:8000/graphql',
-  // uri: 'https://noty-be.onrender.com/graphql'
+  uri: import.meta.env.PROD ? 'https://noty-be.onrender.com/graphql' : 'http://localhost:8000/graphql',
 });
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: 'ws://localhost:8000/graphql',
-    // url: 'wss://noty-be.onrender.com/graphql'
+    url: import.meta.env.PROD ? 'wss://noty-be.onrender.com/graphql' : 'ws://localhost:8000/graphql',
   })
 );
 

@@ -136,10 +136,10 @@ const AddCategory: FC<AddCategoryProps> = ({ open, setOpen }) => {
                                     id="countries"
                                     required={true}
                                     className='w-full'
-                                    value={field1.fieldType}
-                                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                // value={field1.fieldType}
+                                // onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
 
-                                    }}
+                                // }}
                                 >
                                     <option>
                                         Text
