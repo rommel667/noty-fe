@@ -60,9 +60,9 @@ const AddCategoryPage = () => {
     }
 
     return (
-        <div className='md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10'>
-            <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+        <div className='flex-grow overflow-auto px-20 mt-10'>
+            <form className="dark:bg-gray-800 flex flex-col gap-2 h-fit md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10" onSubmit={handleSubmit}>
+                <h3 className="text-xl font-medium text-gray-900 dark:text-gray-200">
                     Create new category
                 </h3>
                 <div>

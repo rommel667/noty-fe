@@ -4,7 +4,7 @@ const AuthenticationPage = () => {
     const location = useLocation()
 
     return (
-        <div className='md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10'>
+        <div className='bg-gray-200 dark:bg-gray-900 flex-grow mt-10'>
             <p className='font-semibold text-center py-2'>{location.pathname.split('/')[2].toUpperCase()}</p>
             <Outlet />
         </div>

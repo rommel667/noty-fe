@@ -43,7 +43,7 @@ const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
     }
 
     return (
-        <Card className='border-l-blue-600 border-l-2 relative'>
+        <Card className='border-l-blue-600 border-l-2 relative h-fit dark:border-l-blue-400'>
             <HiTrash
                 className='w-10 text-red-700 cursor-pointer absolute top-2 right-0'
                 onClick={() => setOpen(true)}

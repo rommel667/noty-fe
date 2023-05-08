@@ -35,7 +35,7 @@ const Signup: FC<SignupProps> = ({ }) => {
     }
 
     return (
-        <form className="flex flex-col gap-4" onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+        <form className="md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10 flex flex-col gap-4" onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (agree !== "on") {
                 setErrorMessage("Please agree with terms and conditions")

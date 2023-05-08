@@ -14,11 +14,8 @@ const CategoryListPage = () => {
         return <div>{`Error! ${error.message}`}</div>
     }
 
-    console.log("DATA", data)
-
     return (
-
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4'>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4 flex-grow mt-16 overflow-auto bg-gray-200 dark:bg-gray-900'>
             {data.categories.map((category: any) => (
                 <CategoryCard key={category.id} category={category} />
             ))}

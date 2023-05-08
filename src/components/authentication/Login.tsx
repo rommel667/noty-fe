@@ -44,7 +44,7 @@ const Login: FC<LoginProps> = ({ }) => {
     }
 
     return (
-        <form className="flex flex-col gap-4" onSubmit={e => {
+        <form className="md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10 flex flex-col gap-4" onSubmit={e => {
             e.preventDefault();
             setIsProcessing(true)
             login({ variables: { ...input } });
