@@ -7,9 +7,10 @@ import { HiClock, HiTrash } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import DeleteConfirmation from './DeleteConfirmation'
 import toast from 'react-hot-toast'
+import { ICategory } from '@/interfaces/category.interface'
 
 interface CategoryCardProps {
-    category: any
+    category: ICategory
 }
 
 const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
@@ -48,7 +49,7 @@ const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
                 className='w-10 text-red-700 cursor-pointer absolute top-2 right-0'
                 onClick={() => setOpen(true)}
             />
-            <h4 onClick={() => navigate(`/${category.id}`)} className="text-2xl font-bold tracking-tight text-gray-800 dark:text-white cursor-pointer">
+            <h4 onClick={() => navigate(`/categories/${category.id}/items`)} className="text-2xl font-bold tracking-tight text-gray-800 dark:text-white cursor-pointer">
                 {category.name}
             </h4>
             <Badge color="info" size='sm' className='w-fit rounded-full px-5 py-1'>

@@ -38,7 +38,7 @@ const Searchbar: FC<SearchbarProps> = ({ }) => {
                 style={{ borderRadius: 0 }}
             />
             <Button className='rounded-l-none'>
-                <HiSearch className="mr-2 h-5 w-5" />
+                <HiSearch className="h-5 w-5" />
             </Button>
 
 

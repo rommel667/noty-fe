@@ -7,22 +7,21 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
 import { HiTrash } from 'react-icons/hi'
 import { GET_CATEGORIES } from './CategoryListPage'
+import { IField } from '@/interfaces/field.interface'
 
 const AddCategoryPage = () => {
     const [isProcessing, setIsProcessing] = useState(false)
     const [categoryName, setCategoryName] = useState('')
     const [selectedCategoryType, setSelectedCategoryType] = useState('Todo')
-    const [fields, setFields] = useState<any>(null)
+    const [fields, setFields] = useState<IField[]>([])
     const { isAuth } = useUserStore()
     const navigate = useNavigate()
 
     const [addCategory] = useMutation(ADD_CATEGORY, {
-        onError(error) {
-            console.log("ERROR", error)
+        onError() {
             setIsProcessing(false)
         },
-        onCompleted(data) {
-            console.log("DATA", data)
+        onCompleted() {
             setIsProcessing(false)
             navigate('/')
         },
@@ -55,7 +54,6 @@ const AddCategoryPage = () => {
 
     const handleDeleteField = (index: number) => {
         const newFields = fields?.filter((_: any, i: number) => i !== index)
-        console.log("NEW", newFields)
         setFields([...newFields])
     }
 
@@ -120,7 +118,7 @@ const AddCategoryPage = () => {
                         />
                     </div>
                 </div>
-                {fields?.map((field1: any, index1: number) => {
+                {fields?.map((field1: IField, index1: number) => {
                     return (
                         <div key={index1} className='flex gap-1 items-center'>
                             <TextInput
@@ -129,8 +127,8 @@ const AddCategoryPage = () => {
                                 className='w-full'
                                 value={field1.fieldName}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    const tempFields: any = []
-                                    fields.map((field2: any, index2: number) => {
+                                    const tempFields: IField[] = []
+                                    fields.map((field2: IField, index2: number) => {
                                         if (index1 === index2) {
                                             tempFields.push({ ...field2, fieldName: e.target.value })
                                         } else {
@@ -148,8 +146,8 @@ const AddCategoryPage = () => {
                                 className='w-full'
                                 value={field1.fieldType}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                    const tempFields: any = []
-                                    fields.map((field2: any, index2: number) => {
+                                    const tempFields: IField[] = []
+                                    fields.map((field2: IField, index2: number) => {
                                         if (index1 === index2) {
                                             tempFields.push({ ...field2, fieldType: e.target.value })
                                         } else {

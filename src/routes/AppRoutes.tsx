@@ -8,6 +8,7 @@ import AuthenticationPage from '@/pages/AuthenticationPage';
 import Login from '@/components/authentication/Login';
 import Signup from '@/components/authentication/Signup';
 import TermsAndConditionsPage from '@/pages/TermsAndConditionsPage';
+import ItemListPage from '@/pages/ItemListPage';
 
 
 const AppRoutes = () => {
@@ -23,7 +24,8 @@ const AppRoutes = () => {
 
       <Route element={<ProtectedRoutes />}>
         <Route path="/" element={<CategoryListPage />} />
-        <Route path="/new-category" element={<AddCategoryPage />} />
+        <Route path="new-category" element={<AddCategoryPage />} />
+        <Route path="categories/:id/items" element={<ItemListPage />} />
         {/* <Route path="/:id" element={<CategoryList />} /> */}
       </Route>
 

@@ -1,5 +1,5 @@
 export interface IField {
-  id: number;
+  id?: number;
   fieldName: string;
   fieldType: string;
   createdAt?: Date;

@@ -4,6 +4,7 @@ import Profile from '../common/Profile'
 import Searchbar from '../common/Searchbar'
 import { useNavigate } from 'react-router-dom'
 import Mode from './Mode'
+import { FaPlus } from 'react-icons/fa'
 
 
 interface HeaderProps {
@@ -16,7 +17,7 @@ const Header: FC<HeaderProps> = ({ }) => {
     return (
         <Navbar
             fluid={true}
-            className='fixed w-full top-0 left-0 bg-slate-300 dark:bg-slate-700'
+            className='fixed w-full top-0 left-0 bg-slate-400 dark:bg-slate-700 z-10'
         // rounded={true}
         >
             <Navbar.Brand onClick={() => { }}>
@@ -35,7 +36,7 @@ const Header: FC<HeaderProps> = ({ }) => {
                     Add Category
                 </Button>
                 <Button className='lg:hidden' onClick={() => navigate('/new-category')}>
-                    +
+                    <FaPlus />
                 </Button>
                 <Mode />
                 <Profile />
