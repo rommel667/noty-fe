@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { Label, TextInput, Checkbox, Button, Alert } from 'flowbite-react'
 import { gql, useMutation } from '@apollo/client';
 import { HiOutlineInformationCircle } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface SignupProps {
 
@@ -11,6 +11,7 @@ interface SignupProps {
 const Signup: FC<SignupProps> = ({ }) => {
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     const [input, setInput] = useState({ firstName: '', lastName: '', email: '', password: '' })
     const [agree, setAgree] = useState("off")
@@ -35,7 +36,7 @@ const Signup: FC<SignupProps> = ({ }) => {
     }
 
     return (
-        <form className="md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10 flex flex-col gap-4" onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+        <form className="g-gray-100 dark:bg-gray-800 md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10 flex flex-col gap-4" onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (agree !== "on") {
                 setErrorMessage("Please agree with terms and conditions")
@@ -44,6 +45,7 @@ const Signup: FC<SignupProps> = ({ }) => {
             setIsProcessing(true)
             signup({ variables: { createUserInput: input } });
         }}>
+            <p className='font-bold text-gray-700 dark:text-gray-300 text-center'>{location.pathname.split('/')[2].toUpperCase()}</p>
             {errorMessage ?
                 <Alert
                     color="failure"
@@ -132,11 +134,12 @@ const Signup: FC<SignupProps> = ({ }) => {
                 <TextInput
                     id="repeat-password"
                     type="password"
+                    name="repeat-password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required={true}
                     shadow={true}
-                    color={(input.password !== '' && confirmPassword !== '') ? (input.password !== confirmPassword ? 'failure' : 'success') : ''}
+                    color={(input.password !== '' && confirmPassword !== '') ? (input.password !== confirmPassword ? 'failure' : 'success') : undefined}
                     helperText={input.password !== '' && confirmPassword !== '' && (input.password !== confirmPassword ? 'Passwords not match' : 'Passwords match')}
                 />
             </div>
@@ -159,7 +162,7 @@ const Signup: FC<SignupProps> = ({ }) => {
                 Register new account
             </Button>
             <div className='mx-auto'>
-                <p>Already have an account?
+                <p className='text-gray-700 dark:text-gray-300'>Already have an account?
                     <span className="text-blue-600 hover:underline dark:text-blue-500 underline cursor-pointer ml-2" onClick={() => navigate('/auth/signin')}>
                         Login
                     </span>

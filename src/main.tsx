@@ -30,11 +30,13 @@ const splitLink = split(
   httpLink
 );
 
-const authorizationLink = setContext(() => {
+const authorizationLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  console.log("TOKEN", token)
   return {
     headers: {
-      // authorization: token ? `Bearer ${token}` : '',
+      // authorization: globalToken.accessToken ? `Bearer ${globalToken.accessToken}` : '',
+      ...headers,
       authorization: token ? `Bearer ${token}` : '',
     },
   };

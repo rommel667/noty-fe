@@ -3,7 +3,6 @@ import PublicRoutes from './PublicRoutes';
 import ProtectedRoutes from './ProtectedRoutes';
 import CatchAllRoutes from './CatchAllRoutes';
 import CategoryListPage from '@/pages/CategoryListPage';
-import AddCategoryPage from '@/pages/AddCategoryPage';
 import AuthenticationPage from '@/pages/AuthenticationPage';
 import Login from '@/components/authentication/Login';
 import Signup from '@/components/authentication/Signup';
@@ -24,7 +23,6 @@ const AppRoutes = () => {
 
       <Route element={<ProtectedRoutes />}>
         <Route path="/" element={<CategoryListPage />} />
-        <Route path="new-category" element={<AddCategoryPage />} />
         <Route path="categories/:id/items" element={<ItemListPage />} />
         {/* <Route path="/:id" element={<CategoryList />} /> */}
       </Route>

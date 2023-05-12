@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
 import jwt_decode from 'jwt-decode';
+// import { globalToken } from '@/main';
 // import { User } from 'interfaces/user.interface';
-// import { globalToken } from 'graphql/client/client';
 
 const decodeToken = () => {
   const token =
@@ -29,6 +29,8 @@ const deleteToken = () => {
 interface TokenData {
   id: string;
   email: string;
+  firstName: string;
+  lastName: string;
 }
 
 interface UserStore {

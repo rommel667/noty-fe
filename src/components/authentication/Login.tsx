@@ -3,7 +3,7 @@ import { Label, TextInput, Checkbox, Button, Alert } from 'flowbite-react'
 import { gql, useMutation } from '@apollo/client';
 import { useUserStore } from '@/state/user.store';
 import { HiInformationCircle } from "react-icons/hi";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface LoginProps {
 
@@ -12,6 +12,7 @@ interface LoginProps {
 const Login: FC<LoginProps> = ({ }) => {
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     const [rememberMe, setRememberMe] = useState("off")
     const [input, setInput] = useState({ email: '', password: '' })
@@ -21,12 +22,10 @@ const Login: FC<LoginProps> = ({ }) => {
 
     const [login] = useMutation(LOGIN, {
         onError(error) {
-            console.log("ERROR", error)
             setErrorMessage(error.message)
             setIsProcessing(false)
         },
         onCompleted(data) {
-            console.log("DATA", data)
             if (rememberMe === "on") {
                 localStorage.setItem("token", data.login)
                 updateIsAuth()
@@ -44,11 +43,12 @@ const Login: FC<LoginProps> = ({ }) => {
     }
 
     return (
-        <form className="md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10 flex flex-col gap-4" onSubmit={e => {
+        <form className="bg-gray-100 dark:bg-gray-800 md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto border rounded-md shadow-md p-5 mt-10 flex flex-col gap-4" onSubmit={e => {
             e.preventDefault();
             setIsProcessing(true)
             login({ variables: { ...input } });
         }}>
+            <p className='font-bold text-gray-700 dark:text-gray-300 text-center'>{location.pathname.split('/')[2].toUpperCase()}</p>
             {errorMessage ?
                 <Alert
                     color="failure"
@@ -102,7 +102,7 @@ const Login: FC<LoginProps> = ({ }) => {
                 Submit
             </Button>
             <div className='mx-auto'>
-                <p>No account yet?
+                <p className='text-gray-700 dark:text-gray-300'>No account yet?
                     <span className="text-blue-600 hover:underline dark:text-blue-500 underline cursor-pointer ml-2" onClick={() => navigate('/auth/signup')}>
                         Register
                     </span>

@@ -5,9 +5,10 @@ import moment from 'moment'
 import { FC, useState } from 'react'
 import { HiClock, HiTrash } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
-import DeleteConfirmation from './DeleteConfirmation'
 import toast from 'react-hot-toast'
 import { ICategory } from '@/interfaces/category.interface'
+import Modal from '../common/Modal'
+import DeleteCategoryForm from '../forms/DeleteCategoryForm'
 
 interface CategoryCardProps {
     category: ICategory
@@ -16,8 +17,8 @@ interface CategoryCardProps {
 const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
     const navigate = useNavigate()
 
-    const [open, setOpen] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     const [deletecategory] = useMutation(DELETE_CATEGORY, {
         refetchQueries: [GET_CATEGORIES, 'GetCategories'],
@@ -47,7 +48,7 @@ const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
         <Card className='border-l-blue-600 border-l-2 relative h-fit dark:border-l-blue-400'>
             <HiTrash
                 className='w-10 text-red-700 cursor-pointer absolute top-2 right-0'
-                onClick={() => setOpen(true)}
+                onClick={() => setShowModal(true)}
             />
             <h4 onClick={() => navigate(`/categories/${category.id}/items`)} className="text-2xl font-bold tracking-tight text-gray-800 dark:text-white cursor-pointer">
                 {category.name}
@@ -73,7 +74,10 @@ const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
                     <p className='text-xs text-gray-500'>Updated {moment(category.updatedAt).fromNow()}</p>
                 </Badge>
             </div>
-            <DeleteConfirmation open={open} setOpen={setOpen} handleConfirm={() => handleDeleteCategory(category.id)} isProcessing={isProcessing} />
+            {/* <DeleteConfirmation open={open} setOpen={setOpen} handleConfirm={() => handleDeleteCategory(category.id)} isProcessing={isProcessing} /> */}
+            <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
+                <DeleteCategoryForm isProcessing={isProcessing} onClose={() => setShowModal(false)} handleConfirm={() => handleDeleteCategory(category.id)} />
+            </Modal>
         </Card>
     )
 }

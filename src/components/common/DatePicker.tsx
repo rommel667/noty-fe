@@ -9,18 +9,19 @@ import Datepicker from "tailwind-datepicker-react"
 
 
 interface DatePickerProps {
-
+    onChange: (selectedDate: Date) => void;
+    selectedDate: any;
 }
 
-const DatePicker: FC<DatePickerProps> = ({ }) => {
+const DatePicker: FC<DatePickerProps> = ({ onChange, selectedDate }) => {
 
 
     const [show, setShow] = useState<boolean>(false)
-    const [selectedDate, setSelectedDate] = useState<any>(null)
-    const handleChange = (selectedDate: Date) => {
-        setSelectedDate(selectedDate)
-        console.log(selectedDate)
-    }
+    // const [selectedDate, setSelectedDate] = useState<any>(null)
+    // const handleChange = (selectedDate: Date) => {
+    //     setSelectedDate(selectedDate)
+    //     console.log(selectedDate)
+    // }
 
     const handleClose = (state: boolean) => {
         setShow(state)
@@ -55,7 +56,7 @@ const DatePicker: FC<DatePickerProps> = ({ }) => {
     }
 
     return (
-        <Datepicker options={options} onChange={handleChange} show={show} setShow={handleClose}>
+        <Datepicker options={options} onChange={onChange} show={show} setShow={handleClose}>
             <div>
 
                 <TextInput
